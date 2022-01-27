@@ -27,10 +27,14 @@ loop do
 
   elsif they_said == "list"
 
-  socket.puts nl.list
+    socket.puts nl.list
 
   end
 
 end
 
 socket.close
+
+# run server on the host
+# on the client "telnet [ipaddress] [port]"
+# can interact with server over local network
