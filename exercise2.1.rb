@@ -10,16 +10,10 @@ loop do
 
   they_said = socket.gets.chomp
 
-  if they_said == "quit"
-
-    socket.close
-
-  else
-
-  socket.puts "You said: #{they_said}."
-
-  end
+  socket.puts "You said: #{they_said}. Goodbye!"
 
 end
 
 socket.close
+
+# Must close server using control c, no exit possibile otherwise?
