@@ -5,4 +5,8 @@ class User
     @password = password
   end
 
+  def check_password(entered_password)
+    @password == entered_password
+  end
+
 end 
