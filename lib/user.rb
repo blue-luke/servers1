@@ -17,4 +17,8 @@ class User
     @notelist
   end
 
+  def lock
+    @unlocked = false
+  end
+
 end 
