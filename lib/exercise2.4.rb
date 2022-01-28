@@ -26,37 +26,45 @@ loop do
 
     password = socket.gets.chomp
 
-    if user.check_password(password)
+  else !users.list_users.include? "#{name}"
 
-      socket.puts 'Choose your option: new note, list, lock list'
+    socket.puts 'New user! Enter a password'
 
-      they_said = gets.chomp
+    password = socket.gets.chomp
 
-      if they_said == "new note"
+    users.add_user(name, password)
+  
+  end
 
-        socket.puts 'Enter note content'
-    
-        content = socket.gets.chomp
-        
-        user.notelist.new_note(content)
-    
-      elsif they_said == "list"
-    
-        socket.puts user.notelist.list
+  if user.check_password(password)
 
-      elsif they_said == "lock list"
-    
-        socket.puts user.lock
-    
-      end
+    socket.puts 'Choose your option: new note, list, lock list'
 
-    else
+    they_said = gets.chomp
 
-      socket.puts 'Password incorrect'
+    if they_said == "new note"
 
-      interact
+      socket.puts 'Enter note content'
+  
+      content = socket.gets.chomp
+      
+      user.notelist.new_note(content)
+  
+    elsif they_said == "list"
+  
+      socket.puts user.notelist.list
 
+    elsif they_said == "lock list"
+  
+      socket.puts user.lock
+  
     end
+
+  else
+
+    socket.puts 'Password incorrect'
+
+    interact
 
   end
 
