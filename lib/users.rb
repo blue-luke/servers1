@@ -1,6 +1,6 @@
-require 'user'
+require './user'
 
-class Users 
+class Users
   def initialize(user = User)
     @all_users = []
     @user = User
@@ -10,5 +10,8 @@ class Users
   end
   def list_users
     @all_users.map { |x| x.name }.join(" ")
+  end
+  def find_user(name)
+    @all_users.select { |x| x.name == name }
   end
 end

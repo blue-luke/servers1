@@ -1,39 +1,67 @@
 require 'socket'
 require './notelist'
+require './users'
 
 server = TCPServer.new(2345)
 
 socket = server.accept
 
-nl = Notelist.new
+# nl = Notelist.new
+
+users = Users.new
+
+  # socket.puts 'Enter a note with "new note", list notes with "list", quit with "quit"'
+
+  socket.puts 'Type name to login'
+
+  name = socket.gets.chomp
 
 loop do
 
-  socket.puts 'Enter a note with "new note", list notes with "list", quit with "quit"'
+  if users.list_users.include? "#{name}"
 
-  they_said = socket.gets.chomp
+    user = users.find_user(name)
 
-  if they_said == "quit"
+    socket.puts 'Type password to login'
 
-    socket.close
+    password = socket.gets.chomp
 
-  elsif they_said == "new note"
+    if user.check_password(password)
 
-    socket.puts 'Enter note content'
+      socket.puts 'Choose your option: new note, list, lock list'
 
-    content = socket.gets.chomp
+      they_said = gets.chomp
+
+      if they_said == "new note"
+
+        socket.puts 'Enter note content'
     
-    nl.new_note(content)
+        content = socket.gets.chomp
+        
+        user.notelist.new_note(content)
+    
+      elsif they_said == "list"
+    
+        socket.puts user.notelist.list
 
-  elsif they_said == "list"
+      elsif they_said == "lock list"
+    
+        socket.puts user.lock
+    
+      end
 
-    socket.puts nl.list
+    else
+
+      socket.puts 'Password incorrect'
+
+      interact
+
+    end
 
   end
 
 end
 
-socket.close
 
 # run server on the host
 # on the client "telnet [ipaddress] [port]"

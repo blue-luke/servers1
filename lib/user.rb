@@ -1,3 +1,5 @@
+require './notelist'
+
 class User
   attr_reader :name
   def initialize(name, password, notelist = Notelist)
