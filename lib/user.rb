@@ -1,5 +1,5 @@
 class User
-  attr_reader :name, :password
+  attr_reader :name
   def initialize(name, password)
     @name = name
     @password = password
