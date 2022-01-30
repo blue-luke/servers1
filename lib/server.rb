@@ -56,21 +56,33 @@ loop do
       socket.puts "Enter username to login as"
       name = socket.gets
       user = users.find_user(name)
-      return socket.puts "User not found" unless user
-      socket.puts "Enter user password"
-      password = socket.gets
-      user.login(password)
+      unless user
+        socket.puts "User not found"
+      else
+        socket.puts "Enter user password"
+        password = socket.gets
+        user.login(password)
+      end
     when 5
-      socket.puts "No logged in user" unless user
-      socket.puts "Enter note content"
-      content = socket.gets
-      user.add_note(content)
+      unless user 
+        socket.puts "No logged in user"
+      else 
+        socket.puts "Enter note content"
+        content = socket.gets
+        user.add_note(content)
+      end
     when 6
-      return socket.puts "No logged in user" unless user
-      socket.puts user.list_notes
+      unless user
+        socket.puts "No logged in user"
+      else 
+        socket.puts user.list_notes
+      end
     when 7
-      return socket.puts "No logged in user" unless user
-      user.lock
-      user = nil
+      unless user
+        socket.puts "No logged in user"
+      else
+        user.lock
+        user = nil
+      end
   end
 end
