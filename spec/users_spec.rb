@@ -9,4 +9,5 @@ describe 'Users' do
 
     expect(u.list_users).to eq "Jane"
   end
+  # More methods are here
 end

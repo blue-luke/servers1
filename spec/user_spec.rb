@@ -33,9 +33,19 @@ describe 'User' do
     notelist_class_double = double("Notelist", :new => notelist_double)
 
     u = User.new("James", "123456", notelist_class_double)
-    u.check_password("123456")
+    u.login("123456")
     u.lock
 
     expect { u.notelist }.to raise_error(RuntimeError, "User is locked")
+  end
+  it 'allows a note to be added' do
+    notelist_double = double("notelist", :new_note => true, :list => ["Get bananas"])
+    notelist_class_double = double("Notelist", :new => notelist_double)
+
+    u = User.new("James", "123456", notelist_class_double)
+    u.login("123456")
+    u.add_note("Get bananas")
+
+    expect(u.list_notes).to eq "Get bananas"
   end
 end

@@ -12,6 +12,7 @@ class User
   def login(entered_password)
     raise "Incorrect password" unless check_password(entered_password)
     @locked = false
+    "Login successful"
   end
 
   def check_password(entered_password)
@@ -21,6 +22,14 @@ class User
   def notelist
     raise "User is locked" if @locked
     @notelist
+  end
+
+  def list_notes
+    @notelist.list.join("; ")
+  end
+
+  def add_note(content)
+    @notelist.new_note(content)
   end
 
   def lock
