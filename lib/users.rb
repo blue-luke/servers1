@@ -1,4 +1,4 @@
-require './lib/user'
+require './user'
 
 class Users
   def initialize(user = User)

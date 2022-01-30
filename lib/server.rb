@@ -9,10 +9,11 @@ socket = server.accept
 
 users = Users.new
 
+user = nil
+
 # need an identified user. What if someone chooses 5 without logging in?
 
 loop do
-  user = nil
 
   if user
     socket.puts "Make your selection using numbers:\n
@@ -41,28 +42,35 @@ loop do
       password = socket.gets
       users.add_user(name, password)
     when 2
-      users.list_users
+      socket.puts users.list_users
     when 3
       socket.puts "Enter username to search for"
       name = socket.gets
       users.find_user(name)
+      if name
+        socket.puts "User is found, login as #{name}"
+      else
+        socket.puts "User not found"
+      end
     when 4 
       socket.puts "Enter username to login as"
       name = socket.gets
       user = users.find_user(name)
+      return socket.puts "User not found" unless user
       socket.puts "Enter user password"
       password = socket.gets
       user.login(password)
     when 5
-      return "No logged in user" unless user
+      socket.puts "No logged in user" unless user
       socket.puts "Enter note content"
       content = socket.gets
       user.add_note(content)
     when 6
-      return "No logged in user" unless user
-      user.list_notes
+      return socket.puts "No logged in user" unless user
+      socket.puts user.list_notes
     when 7
-      return "No logged in user" unless user
+      return socket.puts "No logged in user" unless user
       user.lock
+      user = nil
   end
 end

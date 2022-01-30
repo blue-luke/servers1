@@ -1,4 +1,4 @@
-require './lib/notelist'
+require './notelist'
 
 class User
   attr_reader :name, :password, :locked
@@ -18,7 +18,7 @@ class User
   def check_password(entered_password)
     @password == entered_password
   end
-  
+
   def list_notes
     raise "User is locked" if @locked
     @notelist.list.join("; ")
