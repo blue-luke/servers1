@@ -15,7 +15,7 @@ The next step was to build a command line interfact to allow the app to be opera
 ## To operate
 
 - Run [$ irb server.rb] on one computer
-- Run telnet '[network ip]' 2345 on another computer on the same network. Network ip must be network ip of the server computer. Running [$ ifconfig en0] on a mac will show network up
+- Run [$ telnet '[network ip]' 2345] on another computer on the same network. Network ip must be network ip of the server computer. Running [$ ifconfig en0] on a mac will show network up
 
 ## Interacting with the app
  
