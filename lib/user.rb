@@ -1,26 +1,30 @@
-require './notelist'
+require './lib/notelist'
 
 class User
-  attr_reader :name
+  attr_reader :name, :password, :locked
   def initialize(name, password, notelist = Notelist)
     @name = name
     @password = password
     @notelist = notelist.new
-    @unlocked = false
+    @locked = true
+  end
+
+  def login(entered_password)
+    raise "Incorrect password" unless check_password(entered_password)
+    @locked = false
   end
 
   def check_password(entered_password)
     @password == entered_password
-    @unlocked = true
   end
 
   def notelist
-    raise "User is locked" unless @unlocked
+    raise "User is locked" if @locked
     @notelist
   end
 
   def lock
-    @unlocked = false
+    @locked = true
   end
 
 end 
