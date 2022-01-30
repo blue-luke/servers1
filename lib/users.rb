@@ -12,6 +12,6 @@ class Users
     @all_users.map { |x| x.name }.join(" ")
   end
   def find_user(name)
-    @all_users.select { |x| x.name == name }
+    @all_users.select { |x| x.name == name }[0]
   end
 end
