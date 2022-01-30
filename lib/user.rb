@@ -18,12 +18,7 @@ class User
   def check_password(entered_password)
     @password == entered_password
   end
-
-  # def notelist
-  #   raise "User is locked" if @locked
-  #   @notelist
-  # end
-
+  
   def list_notes
     raise "User is locked" if @locked
     @notelist.list.join("; ")
